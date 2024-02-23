@@ -1,63 +1,111 @@
+import { useState } from "react";
 import Gender from "./Gender";
+import { Link } from "react-router-dom";
+import useSignup from "../hooks/useSignup.js";
 
 const SignUp = () => {
+  const [inputs, setInputs] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
+
+  const { loading, signup } = useSignup();
+
+  const handleCheckBox = (gender) => {
+    setInputs({ ...inputs, gender });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signup(inputs);
+  };
+
   return (
-    <>
-      <div className="border">
-        <div
-          className="
-h-full w-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-100
-"
-        >
-          {" "}
-          {/* left section  */}
-          <div className="left-part">
-            <div className="right-header">
-              <h1 className="lheader">
-                Welcome to <span className="logo">TEXER</span>
-              </h1>
-              <p className="left-para">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-                repellendus aspernatur consequatur nulla temporibus?
-                Distinctihtrhrhrhythythyth
-              </p>
-            </div>
+  
+      <div className="border-Outline">
+        {/* left section  */}
+        <div className="left-part">
+          <div className="right-header">
+            <h1 className="lheader">
+              Welcome to <span className="logo">TEXER</span>
+            </h1>
+            <p className="left-para">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+              repellendus aspernatur consequatur nulla temporibus?
+              Distinctihtrhrhrhythythyth
+            </p>
           </div>
-          {/* right section */}
-          <div className="right-part">
-            <div className="rheader"> SIGNUP</div>
+        </div>
+        {/* right section */}
+        <div className="right-part">
+          <div className="rheader"> SIGNUP</div>
+          <form onSubmit={handleSubmit}>
             <div className="username">
-              <label className=" m-3 input input-bordered  input-sm w flex items-center gap-2">
-                <input type="text" className="grow" placeholder="Full Name" />
-              </label>
-
-              <label className=" m-3 input input-bordered input-sm w flex items-center gap-2">
-                <input type="text" className="grow" placeholder="User Name" />
-              </label>
-
-              <label className=" m-3 input input-bordered input-sm w flex items-center gap-2">
-                <input type="text" className="grow" placeholder="Password" />
-              </label>
-
               <label className=" m-3 input input-bordered  input-sm w flex items-center gap-2">
                 <input
                   type="text"
                   className="grow"
-                  placeholder="Confirm Password"
+                  placeholder="Full Name"
+                  value={inputs.fullName}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, fullName: e.target.value })
+                  }
                 />
               </label>
-              <Gender />
-              <a href="#" className="haveaccount">
+
+              <label className=" m-3 input input-bordered input-sm w flex items-center gap-2">
+                <input
+                  type="text"
+                  className="grow"
+                  placeholder="User Name"
+                  value={inputs.username}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, username: e.target.value })
+                  }
+                />
+              </label>
+
+              <label className=" m-3 input input-bordered input-sm w flex items-center gap-2">
+                <input
+                  type="password"
+                  className="grow"
+                  placeholder="Password"
+                  value={inputs.password}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, password: e.target.value })
+                  }
+                />
+              </label>
+
+              <label className=" m-3 input input-bordered  input-sm w flex items-center gap-2">
+                <input
+                  type="password"
+                  className="grow"
+                  placeholder="Confirm Password"
+                  value={inputs.confirmPassword}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, confirmPassword: e.target.value })
+                  }
+                />
+              </label>
+              <Gender
+                onCheckboxChange={handleCheckBox}
+                selectedGender={inputs.gender}
+              />
+              <Link to="/login" className="haveaccount">
                 already have account
-              </a>
+              </Link>
             </div>
             <div className="flex  justify-center">
               <button className=" mt-5 button">SIGNUP</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-    </>
+    
   );
 };
 
