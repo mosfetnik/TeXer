@@ -2,9 +2,10 @@
   "name": "texer",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "server": "nodemon back_end/server.js"
+    
   },
   "type": "module",
   "keywords": [],

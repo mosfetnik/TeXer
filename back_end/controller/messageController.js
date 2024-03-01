@@ -14,7 +14,7 @@ export const sendMessage = async (req, res) => {
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
-      });
+      }); 
     }
 
     const newMessage = new Message({
@@ -24,14 +24,14 @@ export const sendMessage = async (req, res) => {
     });
 
     if (newMessage) {
-      conversation.message.push(newMessage._id);
+      conversation.messages.push(newMessage._id);
     }
 
     await Promise.all([conversation.save(), newMessage.save()]);
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller:", error.message);
-    res.status(500).json({ error: "Internal server Error" });
+    res.status(500).json({ error: "Internal server Error 4" });
   }
 };
 
@@ -41,13 +41,13 @@ export const getMessage = async (req, res) => {
     const senderId = req.user._id;
     const conversation = await Conversation.findOne({
       participants: { $all: [senderId, userToChatId] },
-    }).populate("message");
+    }).populate("messages");
 
-    if (!conversation) return res.ststus(200).json([]);
-    const messages = conversation.message;
+    if (!conversation) return res.status(200).json([]);
+    const messages = conversation.messages;
     res.status(200).json(messages);
   } catch (error) {
     console.log("Error in getMessage controller:", error.message);
-    res.status(500).json({ error: "Internal server Error" });
+    res.status(500).json({ error: "Internal server Error 5" });
   }
 };

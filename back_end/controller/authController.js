@@ -13,7 +13,7 @@ export const signup = async (req, res) => {
     const user = await User.findOne({ username });
 
     if (user) {
-      return res.status(400).json({ error: "User Name already exisit" });
+      return res.status(400).json({ error: "User Name already exists" });
     }
 
     // HAsh password here
@@ -22,8 +22,8 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Avatar api
-    const boyProfilePic = `https://avatar.iran.liran.run/public/boy?username=${username}`;
-    const girlProfilePic = `https://avatar.iran.liran.run/public/girl?username=${username}`;
+    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
     const newUser = new User({
       fullName,
@@ -34,6 +34,7 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
+      
       // GEnrate JWT token
 
       genrateTokenAndSetCookie(newUser._id, res);
@@ -48,9 +49,9 @@ export const signup = async (req, res) => {
     } else {
       res.status(400).json({ error: "Invalid user data" });
     }
-  } catch (err) {
-    console.log("Error in SignUp controller", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+  } catch (error) {
+    console.log("Error in SignUp controller", error.message);
+    res.status(500).json({ error: "Internal Server Error 1" });
   }
 };
 
@@ -77,7 +78,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in controller", error.message);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error 2" });
   }
 
   console.log("loginUser");
@@ -89,6 +90,6 @@ export const logout = async (req, res) => {
     res.status(200).json({ message: "Logged out sucessfully" });
   } catch (error) {
     console.log("Error in logout controller", error.message);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error 3" });
   }
 };

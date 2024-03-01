@@ -1,9 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/useAuthContext";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
-
+  const { setAuthUser}  = useAuthContext();
   const signup = async ({
     fullName,
     username,
@@ -26,7 +27,10 @@ const useSignup = () => {
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "User-agent": "learning app",
+        },
         body: JSON.stringify({
           fullName,
           username,
@@ -38,6 +42,16 @@ const useSignup = () => {
 
       const data = await res.json();
       console.log(data);
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      //local storage
+      localStorage.setItem("chat-user", JSON.stringify(data));
+
+      //context value
+      setAuthUser(data);
+
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -50,6 +64,7 @@ const useSignup = () => {
 };
 
 export default useSignup;
+
 function handleInputErrors({
   fullName,
   username,
@@ -66,6 +81,7 @@ function handleInputErrors({
     toast.error("Password do not matched");
     return false;
   }
+
   if (password.length < 6) {
     toast.error("password must be at least 6 character");
     return false;
