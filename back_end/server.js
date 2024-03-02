@@ -7,11 +7,9 @@ import authRoutes from "./routes/authRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import connectToMongoDB from "./db/connectionDB.js";
-import cors from 'cors'
+import {app,server } from './socket/socket.js'
 
 
-
-const app = express();
 const PORT = process.env.PORT;
 
 
@@ -19,7 +17,7 @@ const PORT = process.env.PORT;
 dotenv.config();
 
 
-// middleware
+// middleware8i;;  /............khtf= y w
 app.use(express.json());
 app.use(cookieParser());
 // app.use(cors())
@@ -32,7 +30,7 @@ app.use("/api/users", userRoutes);
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server Listen on ${PORT}`);
 });

@@ -1,5 +1,8 @@
 import Conversation from "../modals/conversation.js";
 import Message from "../modals/message.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
+
+
 
 export const sendMessage = async (req, res) => {
   try {
@@ -14,7 +17,7 @@ export const sendMessage = async (req, res) => {
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
-      }); 
+      });
     }
 
     const newMessage = new Message({
@@ -28,6 +31,14 @@ export const sendMessage = async (req, res) => {
     }
 
     await Promise.all([conversation.save(), newMessage.save()]);
+
+    //socket IO FUNCATIONALITY WILL GO HERE
+
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller:", error.message);

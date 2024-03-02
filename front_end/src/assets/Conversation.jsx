@@ -1,25 +1,24 @@
+import { useSocketContext } from "../context/SocketContext";
 import useConversation from "../zustand/useConversation";
 
+export const Conversation = ({ conversation, emoji, lastIdx }) => {
+  const { selectedConversation, setSelectedConversation } = useConversation();
 
-export const Conversation = ({conversation,emoji,lastIdx}) => {
-
-const {selectedConversation,setSelectedConversation} =useConversation()
-
-const isSelected = selectedConversation ?._id ===conversation._id;
-
+  const isSelected = selectedConversation?._id === conversation._id;
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
 
   return (
     <>
-      <div className= {`flex gap-2 item-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
-    ${isSelected ? "bg-sky-500": ""}
+      <div
+        className={`flex gap-2 item-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
+    ${isSelected ? "bg-sky-500" : ""}
     `}
-    onClick={()=>setSelectedConversation(conversation)}>
-        <div className="avatar online ">
+        onClick={() => setSelectedConversation(conversation)}
+      >
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
           <div className="w-12 rounded-full">
-            <img
-              src={conversation.profilePic}
-              alt="user avatar"
-            />
+            <img src={conversation.profilePic} alt="user avatar" />
           </div>
         </div>
 
@@ -29,10 +28,8 @@ const isSelected = selectedConversation ?._id ===conversation._id;
             <span className="text-xl">{emoji}</span>
           </div>
         </div>
-      </div> 
-      {!lastIdx && <div className="divider my-0 py-0 h-1"/>}
-
-   
+      </div>
+      {!lastIdx && <div className="divider my-0 py-0 h-1" />}
     </>
   );
 };
