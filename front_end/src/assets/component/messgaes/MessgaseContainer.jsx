@@ -19,9 +19,9 @@ const MessgaseContainer = () => {
       ) : (
         <>
           {/* Header */}
-          <div className="'bg-slate-500 px-4 y-2 mb-2">
+          <div className="bg-sky-500 px-5 y-2 mb-5">
             <span className="label-text">To</span>{" "}
-            <span className="text-gray-900 fon-bold">
+            <span className="text-stone-50 font-bold">
               {selectedConversation.fullName}
             </span>{" "}
           </div>

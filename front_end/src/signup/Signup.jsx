@@ -2,6 +2,7 @@ import { useState } from "react";
 import Gender from "./Gender";
 import { Link } from "react-router-dom";
 import useSignup from "../hooks/useSignup.js";
+ import Footer from "../assets/component/Footer.jsx";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -25,6 +26,8 @@ const SignUp = () => {
   };
 
   return (
+    <>
+    <div className="p-4 h-screen flex items-center ">
     <div className="border-Outline">
       {/* left section  */}
       <div className="left-part">
@@ -106,6 +109,9 @@ const SignUp = () => {
         </form>
       </div>
     </div>
+    </div>
+    <Footer />
+    </>
   );
 };
 

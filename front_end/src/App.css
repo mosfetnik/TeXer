@@ -3,11 +3,12 @@
   font-family: Quicksand;
 }
 .border-Outline {
-  height: 450px;
-  width: 950px;
   display: flex;
   border: none;
   box-shadow: floralwhite;
+ 
+  align-items: center;
+  justify-items: center;
 }
 
 .logo {
@@ -16,11 +17,11 @@
 .left-part {
   height: 450px;
   padding: 10px;
-  width: 550px;
+
   color: white;
 }
 .lheader {
-  font-size: 40px;
+  font-size: clamp(12px, 4vw, 32px);
   text-align: left;
   margin-top: 60px;
   padding: 20px 40px 0px;
@@ -52,15 +53,47 @@
   margin-top: 10px;
   border-radius: 20px;
   color: white;
-  
 }
-.haveaccount{
+.haveaccount {
   font-size: 12px;
 }
-.username{
-  padding:0px 40px 0px 40px;
+.username {
+  padding: 0px 40px 0px 40px;
 }
 
+@media only screen and (max-width: 400px) {
+  .border-Outline {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
 
+  .left-part {
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    text-align: center;
+  }
+
+  .lheader {
+    font-size: 2.5rem;
+    padding: 1px 20px;
+  }
+  .left-para {
+    padding: 0px 20px;
+  }
+
+  .right-part{
+    margin-top: 10vh;
+    width: auto;
+  }
+}
 /* Homepage CSS */
+.hompageContainer{
+border: 
+  2px solid white;
+  
 
+}

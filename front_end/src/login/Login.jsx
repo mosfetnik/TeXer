@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
+import Footer from "../assets/component/Footer";
 //  import { BiUnderline } from "react-icons/bi";
 
 const Login = () => {
@@ -11,29 +12,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(username,password);
+    await login(username, password);
   };
 
   return (
     <>
+    <div className="p-4 h-screen flex items-center ">
       <div className="border-Outline">
-        {/* left section  */}
 
-        <div className="left-part">
+
+     
+      {/* left section  */}
+
+      <div className="left-part">
           <div className="right-header">
-            <h1 className="lheader">
-              Welcome to <span className="logo">TEXER</span>
-            </h1>
-            <p className="left-para">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-              repellendus aspernatur consequatur nulla temporibus?
-              Distinctihtrhrhrhythythyth
-            </p>
-          </div>
-        </div>
+          <h1 className="lheader">
+            Welcome to <span className="logo">TEXER</span>
+          </h1>
+          <p className="left-para">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
+            repellendus aspernatur consequatur nulla temporibus?
+            Distinctihtrhrhrhythythyth
+          </p>
 
-        {/* right section */}
-        <div className="right-part">
+          </div>
+          </div>
+
+      {/* right section */}
+      <div className="right-part">
           <div className="rheader"> USER LOGIN</div>
           <div className="username">
             <form onSubmit={handleSubmit}>
@@ -47,17 +53,17 @@ const Login = () => {
                 />
               </label>
 
-              <label className=" m-3 input input-bordered  input-sm w flex items-center gap-2">
+      <label className=" m-3 input input-bordered  input-sm w flex items-center gap-2">
                 <input
                   type="password"
                   className="grow"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                />
+      />
               </label>
 
-              <Link
+      <Link
                 to="/signup"
                 className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
               >
@@ -71,11 +77,14 @@ const Login = () => {
                     "Login"
                   )}
                 </button>
+      
               </div>
             </form>
           </div>
         </div>
       </div>
+      </div>
+      <Footer />
     </>
   );
 };
