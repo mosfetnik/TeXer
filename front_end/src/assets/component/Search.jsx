@@ -21,7 +21,7 @@ const Search = () => {
       c.fullName.toLowerCase().includes(searchBar.toLowerCase())
     );
 
-    console.log(conversations);
+   
     if (conversation) {
       setSelectedConversation(conversation);
       setSearchBar("");

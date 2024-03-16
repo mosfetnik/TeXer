@@ -6,7 +6,7 @@ import { getRandomEmoji } from "../utils/emojis";
 
 function Conversations() {
 const {loading,conversations}= useGetConversation();
-console.log(conversations)
+
   
   return (
     <>

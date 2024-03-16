@@ -9,7 +9,7 @@ import useListenMessages from "../../../hooks/useListenMessages";
 const Messages = () => {
   const { messages, loading } = useGetMessages();
  useListenMessages()
-  console.log("messages:", messages);
+  
 
   const lastMessageRef = useRef();
 

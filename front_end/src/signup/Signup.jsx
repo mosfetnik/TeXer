@@ -21,7 +21,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
+    
     await signup(inputs);
   };
 
