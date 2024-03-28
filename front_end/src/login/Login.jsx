@@ -31,8 +31,8 @@ const Login = () => {
           </h1>
           <p className="left-para">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-            repellendus aspernatur consequatur nulla temporibus?
-            Distinctihtrhrhrhythythyth
+            repellendus aspernatur consequatur nulla temporibus
+            
           </p>
 
           </div>
